@@ -13,3 +13,16 @@ h1 {
 .rounded {
     border-radius: 50px !important;
 }
+
+input:focus::placeholder {
+    color: transparent
+}
+
+#search-btn {
+    width: 100%;
+    font-size: 20px
+}
+
+.border-4 {
+    border-width: 3px !important ;
+}
