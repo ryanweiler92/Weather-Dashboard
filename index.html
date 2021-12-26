@@ -12,16 +12,16 @@
 </head>
 
 <body>
-    <header class="navbar bg-primary bg-gradient-blue border border-dark border-4 rounded m-5">
+    <header class="navbar bg-primary border-bottom border-dark bg-gradient-blue border-4">
         <div class="mx-auto">
             <h1 class="text-light pt-2">Weather Dashboard</h1>
         </div>
     </header>
 
     
-    <main class="row min-vh-100 m-5 border border-dark">
+    <div class="row min-vh-100 m-3">
      
-        <aside class="col-12 col-lg-3 sticky-top d-flex flex-column p-g p-lg-3 border border-dark">
+        <aside class="col-12 col-lg-3 sticky-top d-flex flex-column p-g p-lg-3">
                 
             <section class="row border-bottom border-dark border-4 pb-4" id="search">
                 <h3>Search for a City:</h3>
@@ -30,16 +30,34 @@
             </section>
 
             <section class="row">
-                <ul id="search-results" class="p-0">
-                    <button type="submit" class="btn btn-secondary mt-3 city-button">New York</button>
+                <ul id="search-history" class="p-0">
+                    <li>
+                    <button type="submit" class="btn mt-3 city-button">New York</button>
+                    </li>
                 </ul>
             </section>
-
-
         </aside>
 
+        <main class="col-12 col-lg-9 d-flex flex-column pl-5">
+
+            <div class="row border border-dark p-2">
+                <div class="col-12">
+                 <h2><span id="city">New York</span><span id="date"> (12/26/2021)</span></h2>
+                
+                    <p>Temp: <span id="temp"></span></p>
+                
+                    <p>Wind: <span id="wind"></span></p>
+               
+                    <p>Humidity: <span id="humidity"></span></p>
+            
+                    <p>UV Index: <span id="UV"></span></p>
+                
+            </div>
+            </div>
+        </main>
+
     
-    </main>
+    </div>
 
 
 

@@ -10,9 +10,6 @@ h1 {
     font-size: 60px;
 }
 
-.rounded {
-    border-radius: 50px !important;
-}
 
 input:focus::placeholder {
     color: transparent
@@ -27,11 +24,14 @@ input:focus::placeholder {
     border-width: 3px !important ;
 }
 
-ul {
+#search-history {
     width: 100%;
+    list-style-type: none;
 }
 
 .city-button {
     width: 100% !important;
-    font-size: 18px
+    font-size: 18px;
+    background-color: #c4c3d0
+
 }
