@@ -23,13 +23,17 @@
      
         <aside class="col-12 col-lg-3 sticky-top d-flex flex-column p-g p-lg-3 border border-dark">
                 
-            <section class="row border-bottom border-dark border-4 pb-4">
+            <section class="row border-bottom border-dark border-4 pb-4" id="search">
                 <h3>Search for a City:</h3>
                 <input type="text" class="form-control border border-dark" id="city-search" placeholder="San Diego">
                 <button type="submit" class="btn btn-primary mt-2" id="search-btn">Search</button>
             </section>
 
-            
+            <section class="row">
+                <ul id="search-results" class="p-0">
+                    <button type="submit" class="btn btn-secondary mt-3 city-button">New York</button>
+                </ul>
+            </section>
 
 
         </aside>

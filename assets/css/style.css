@@ -26,3 +26,12 @@ input:focus::placeholder {
 .border-4 {
     border-width: 3px !important ;
 }
+
+ul {
+    width: 100%;
+}
+
+.city-button {
+    width: 100% !important;
+    font-size: 18px
+}
