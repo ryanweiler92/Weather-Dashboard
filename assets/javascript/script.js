@@ -11,8 +11,10 @@ var citySearchDataList = []
 //variable to assign id's to each city search history
 var cityCount = 0
 
-//get city from search input
-citySearchBtn.addEventListener("click", function(e) {
+
+
+var createCities = function(e){
+    
     e.preventDefault();
 
     console.log('submitting form:', citySearchDataList);
@@ -41,20 +43,24 @@ citySearchBtn.addEventListener("click", function(e) {
     //run save cities function
     saveCities();
 
-})
+}
+
 
 
 var loadCities = function() {
 
+    var cities = JSON.parse(localStorage.getItem("cities"));
 
-    for (var i = 0; i <localStorage.length; i++){
+    console.log(cities)
+    
 
-        
-        //variable to retrieve the value of each key in local storage
-       var getCity = localStorage.getItem(localStorage.key[i])
+    for (var i = 0; i < cities.length; i++) {
+        console.log(cities[i].city)
+        console.log(cities[i].id)
 
-       console.log(localStorage.key[i])
+        var cityName = (cities[i].city)
 
+        var cityId = (cities[i].id)
 
         var searchHistoryEl = document.createElement("li");
         searchHistoryList.appendChild(searchHistoryEl);
@@ -62,9 +68,9 @@ var loadCities = function() {
         var searchHistoryButton = document.createElement("button");
         searchHistoryButton.classList = 'btn mt-3 city-button';
         searchHistoryButton.setAttribute('type', "submit");
-        searchHistoryButton.setAttribute('id', localStorage.key)
+        searchHistoryButton.setAttribute('id', cityId )
 
-        searchHistoryButton.innerHTML = getCity;
+        searchHistoryButton.innerHTML = cityName;
         searchHistoryEl.appendChild(searchHistoryButton);
     }
 }
@@ -72,15 +78,28 @@ var loadCities = function() {
 
 
 //save search results to local storage
+
 var saveCities = function(){
-    for (var i = 0; i <citySearchDataList.length; i++) {
-        
-        var cityIds = citySearchDataList[i].id;
 
-        var cityName = citySearchDataList[i].city
-
-        localStorage.setItem(cityIds, cityName)
-    }
+    localStorage.setItem("cities", JSON.stringify(citySearchDataList));
 }
+
+
+
+
+//get city from search input
+citySearchBtn.addEventListener("click", createCities)
+
+
+// var saveCities = function(){
+//     for (var i = 0; i <citySearchDataList.length; i++) {
+        
+//         var cityIds = citySearchDataList[i].id;
+
+//         var cityName = citySearchDataList[i].city
+
+//         localStorage.setItem(cityIds, cityName)
+//     }
+// }
 
 loadCities();
