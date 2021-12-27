@@ -5,6 +5,14 @@ var citySearchBtn = document.getElementById("search-btn")
 //unorder list element for city search history
 var searchHistoryList = document.getElementById("search-history");
 
+//CURENT WEATHER VARIABLES
+var city = document.getElementById("city-name");
+var date = document.getElementById("date");
+var temp = document.getElementById("temp");
+var wind = document.getElementById("wind");
+var humidity = document.getElementById("humidity");
+var uv = document.getElementById("UV")
+
 //empty object
 var citySearchDataList = []
 
@@ -29,7 +37,7 @@ var createCities = function(e){
     var searchHistoryButton = document.createElement("button");
     searchHistoryButton.classList = 'btn mt-3 city-button';
     searchHistoryButton.setAttribute('type', "submit");
-    searchHistoryButton.setAttribute('id', cityCount ++)
+    searchHistoryButton.setAttribute('id', cityCount++)
 
 
     //create object to store data and push to array
@@ -46,7 +54,7 @@ var createCities = function(e){
 
     console.log(citySearchData.city)
 
-    getCurrentWeather(citySearchData.city)
+    coordinatesApiCall(citySearchData.city)
 
 }
 
@@ -72,7 +80,7 @@ var loadCities = function() {
         var searchHistoryButton = document.createElement("button");
         searchHistoryButton.classList = 'btn mt-3 city-button';
         searchHistoryButton.setAttribute('type', "submit");
-        searchHistoryButton.setAttribute('id', cityId);
+        searchHistoryButton.setAttribute('id', cityCount++);
         searchHistoryButton.innerHTML = cityName;
         searchHistoryEl.appendChild(searchHistoryButton);
     }
@@ -87,13 +95,10 @@ var saveCities = function(){
 
 
 
-var getCurrentWeather = function (cityName) {
+var coordinatesApiCall = function (cityName) {
 
     //format the api url
-    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=9c87e085f289c9904bda474f03fe01ed";
-
-    console.log(apiUrl)
-
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=9c87e085f289c9904bda474f03fe01ed";
 
     //make a request to the url
     fetch(apiUrl).then(function(response) {
@@ -101,9 +106,64 @@ var getCurrentWeather = function (cityName) {
         if (response.ok) {
             response.json().then(function(data){
                 console.log(data)
+                getCoordinates(data)
             })
+        } else {
+            alert("Error: City not Found")
         }
     })
+    .catch(function(error) {
+        alert("Unable to connect to OpenWeather")
+    })
+}
+
+var getCoordinates = function(data){
+    var lon = data.coord.lon
+    var lat = data.coord.lat
+    console.log(lon, lat)
+
+    getWeather(lon, lat)
+}
+
+var getWeather = function(lon, lat){
+
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon +"&units=imperial&appid=9c87e085f289c9904bda474f03fe01ed"
+
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data){
+                displayCurrentWeather(data)
+            })
+        } else {
+            alert("Error: City not found")
+        }
+    })
+    .catch(function(error) {
+        alert("Unable to connect to OpenWeather")
+    })
+}
+
+
+
+var displayCurrentWeather = function (data) {
+    //clear text content fields
+    city.textContent = "";
+    date.textContent = "";
+    temp.textContent = "";
+    wind.textContent = "";
+    humidity.textContent = "";
+    uv.textContent = "";
+
+    //assign text values from API
+    //city.textContent = weather.name;
+    
+    temp.textContent = data.current.temp
+    wind.textContent = data.current.wind_speed + " MPH";
+    humidity.textContent = data.current.humidity + " %";
+    uv.textContent = data.current.uvi;
+
+
+
 
 
 }
