@@ -44,6 +44,10 @@ var createCities = function(e){
     //run save cities function
     saveCities();
 
+    console.log(citySearchData.city)
+
+    getCurrentWeather(citySearchData.city)
+
 }
 
 
@@ -68,7 +72,7 @@ var loadCities = function() {
         var searchHistoryButton = document.createElement("button");
         searchHistoryButton.classList = 'btn mt-3 city-button';
         searchHistoryButton.setAttribute('type', "submit");
-        searchHistoryButton.setAttribute('id', cityId )
+        searchHistoryButton.setAttribute('id', cityId);
         searchHistoryButton.innerHTML = cityName;
         searchHistoryEl.appendChild(searchHistoryButton);
     }
@@ -80,6 +84,33 @@ var saveCities = function(){
     //use cities as key and stringify our object holding our search information
     localStorage.setItem("cities", JSON.stringify(citySearchDataList));
 }
+
+
+
+var getCurrentWeather = function (cityName) {
+
+    //format the api url
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=9c87e085f289c9904bda474f03fe01ed";
+
+    console.log(apiUrl)
+
+
+    //make a request to the url
+    fetch(apiUrl).then(function(response) {
+        //request was successful
+        if (response.ok) {
+            response.json().then(function(data){
+                console.log(data)
+            })
+        }
+    })
+
+
+}
+
+
+
+
 
 
 //runs the create cities function

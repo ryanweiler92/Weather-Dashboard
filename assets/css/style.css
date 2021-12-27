@@ -39,6 +39,3 @@ input:focus::placeholder {
     font-size: 20px;
 };
 
-.bg-primary {
-    background-color: red;
-}
