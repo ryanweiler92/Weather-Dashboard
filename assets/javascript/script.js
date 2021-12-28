@@ -4,6 +4,8 @@ var citySearchInput = document.getElementById("city-search");
 var citySearchBtn = document.getElementById("search-btn")
 //unorder list element for city search history
 var searchHistoryList = document.getElementById("search-history");
+//all forecast cards
+var forecastCards = document.querySelectorAll(".forecast")
 
 //CURENT WEATHER VARIABLES
 var city = document.getElementById("city-name");
@@ -171,7 +173,24 @@ var displayCurrentWeather = function (data) {
     } else {
         uv.classList = "bg-danger"
     }
+
+    var forecastTemp = document.querySelectorAll(".five-day-temp");
+    var forecastWind = document.querySelectorAll(".five-day-wind");
+    var forecastHumidity = document.querySelectorAll(".five-day-humidity");
     
+    for (var i = 0; i < forecastCards.length; i++){
+        forecastTemp[i].textContent = data.daily[i].temp.day;
+        forecastWind[i].textContent = data.daily[i].wind_speed;
+        forecastHumidity[i].textContent = data.daily[i].humidity;
+
+    }
+
+
+
+
+
+
+
 
     displayDates(data);
 }
