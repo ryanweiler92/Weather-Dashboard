@@ -149,37 +149,35 @@ var getWeather = function(lon, lat){
 
 var displayCurrentWeather = function (data) {
     //clear text content fields
-
-    var iconCode = data.current.weather[0].icon
-
     console.log(data)
 
-    console.log(iconCode)
-
-    var iconUrl = "http://openweathermap.org/img/w/"+ iconCode +".png"
-
-
-
-    date.textContent = "";
     temp.textContent = "";
     wind.textContent = "";
     humidity.textContent = "";
     uv.textContent = "";
 
     //assign text values from API
-    var image = document.createElement('img')
     icon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png'>"
     temp.textContent = data.current.temp
     wind.textContent = data.current.wind_speed + " MPH";
     humidity.textContent = data.current.humidity + " %";
     uv.textContent = data.current.uvi;
 
-
-
-
-
+    displayDates(data);
 }
 
+var displayDates = function(data){
+    var unixTimestamp = data.current.dt
+    var a = new Date(unixTimestamp * 1000);
+    var months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var time = month + "/" + date + "/" + year;
+
+    document.getElementById("date").innerHTML = time
+   
+}
 
 
 
