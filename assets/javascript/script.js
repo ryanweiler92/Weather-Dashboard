@@ -66,7 +66,11 @@ var loadCities = function() {
     //get values from local storage
     var cities = JSON.parse(localStorage.getItem("cities"));
     
-        //create object to store data and push to array
+    if (!cities){
+        return
+    }
+
+    //create object to store data and push to array
     var citySearchData = {}
 
     //loop through the local storage
