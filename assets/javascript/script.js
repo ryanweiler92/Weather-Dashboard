@@ -60,7 +60,7 @@ var createCities = function(e){
 }
 
 
-
+//loads cities search from local storage
 var loadCities = function() {
 
     //get values from local storage
@@ -97,6 +97,7 @@ var saveCities = function(){
 
 
 
+
 var coordinatesApiCall = function (cityName) {
 
     //format the api url
@@ -129,6 +130,7 @@ var getCoordinates = function(data){
     getWeather(lon, lat)
 }
 
+//API call to OpenWeather One Call
 var getWeather = function(lon, lat){
 
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon +"&units=imperial&appid=9c87e085f289c9904bda474f03fe01ed"
@@ -148,7 +150,7 @@ var getWeather = function(lon, lat){
 }
 
 
-
+//function to display current weather and forecast weather
 var displayCurrentWeather = function (data) {
     //clear text content fields
     console.log(data)
@@ -181,23 +183,15 @@ var displayCurrentWeather = function (data) {
     
     for (var i = 0; i < forecastCards.length; i++){
         forecastTemp[i].textContent = data.daily[i].temp.day;
-        forecastWind[i].textContent = data.daily[i].wind_speed;
-        forecastHumidity[i].textContent = data.daily[i].humidity;
+        forecastWind[i].textContent = data.daily[i].wind_speed + " MPH";
+        forecastHumidity[i].textContent = data.daily[i].humidity + "%";
         forecastIcon[i].innerHTML = "<img src='http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png'>"
-
-        console.log(data.daily[i].weather[0].icon)
     }
-
-
-
-
-
-
-
 
     displayDates(data);
 }
 
+//function to display dates in current weather and forecast
 var displayDates = function(data){
     //get unix date from API and convert 
     var unixTimestamp = data.current.dt
@@ -221,17 +215,21 @@ var displayDates = function(data){
         var date = a.getDate();
         var time = month + "/" + date + "/" + year;
 
-        console.log(time)
         forecastDate[i].innerHTML = time
     }
 }
 
 
-
-
-
 //runs the create cities function
 citySearchBtn.addEventListener("click", createCities)
 
+//reloads previously searched weather information
+document.addEventListener("click", function(e){
+    if (e.target.classList == "btn mt-3 city-button"){
+        var city = (e.target).textContent
+        console.log((e.target).textContent)
+        coordinatesApiCall(city)
+    }
+})
 
 loadCities();
