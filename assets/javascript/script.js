@@ -174,6 +174,7 @@ var displayCurrentWeather = function (data) {
         uv.classList = "bg-danger"
     }
 
+    var forecastIcon = document.querySelectorAll(".five-day-icon");
     var forecastTemp = document.querySelectorAll(".five-day-temp");
     var forecastWind = document.querySelectorAll(".five-day-wind");
     var forecastHumidity = document.querySelectorAll(".five-day-humidity");
@@ -182,7 +183,9 @@ var displayCurrentWeather = function (data) {
         forecastTemp[i].textContent = data.daily[i].temp.day;
         forecastWind[i].textContent = data.daily[i].wind_speed;
         forecastHumidity[i].textContent = data.daily[i].humidity;
+        forecastIcon[i].innerHTML = "<img src='http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png'>"
 
+        console.log(data.daily[i].weather[0].icon)
     }
 
 
@@ -207,6 +210,20 @@ var displayDates = function(data){
 
     document.getElementById("date").innerHTML = time
    
+    var forecastDate = document.querySelectorAll(".five-day-date");
+
+    for (var i = 0; i < forecastCards.length; i++){
+        var unixTimestamp = data.daily[i].dt
+        var a = new Date(unixTimestamp * 1000);
+        var months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var time = month + "/" + date + "/" + year;
+
+        console.log(time)
+        forecastDate[i].innerHTML = time
+    }
 }
 
 
