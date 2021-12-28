@@ -66,6 +66,9 @@ var loadCities = function() {
     //get values from local storage
     var cities = JSON.parse(localStorage.getItem("cities"));
     
+        //create object to store data and push to array
+    var citySearchData = {}
+
     //loop through the local storage
     for (var i = 0; i < cities.length; i++) {
         
@@ -85,6 +88,11 @@ var loadCities = function() {
         searchHistoryButton.setAttribute('id', cityCount++);
         searchHistoryButton.innerHTML = cityName;
         searchHistoryEl.appendChild(searchHistoryButton);
+
+    
+        citySearchData.city = cityName
+        citySearchData.id =  cityId
+        citySearchDataList.push(citySearchData)
     }
 }
 
