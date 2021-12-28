@@ -39,3 +39,7 @@ input:focus::placeholder {
     font-size: 20px;
 };
 
+.city-font {
+    font-size: 40px;
+    
+}

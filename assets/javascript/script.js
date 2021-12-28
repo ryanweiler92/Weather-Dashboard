@@ -7,6 +7,7 @@ var searchHistoryList = document.getElementById("search-history");
 
 //CURENT WEATHER VARIABLES
 var city = document.getElementById("city-name");
+var icon = document.getElementById("weather-icon");
 var date = document.getElementById("date");
 var temp = document.getElementById("temp");
 var wind = document.getElementById("wind");
@@ -25,8 +26,6 @@ var createCities = function(e){
     
     //prevents page from refreshing
     e.preventDefault();
-
-    console.log('submitting form:', citySearchDataList);
 
     //create li element
     var searchHistoryEl = document.createElement("li");
@@ -67,6 +66,7 @@ var loadCities = function() {
     
     //loop through the local storage
     for (var i = 0; i < cities.length; i++) {
+        
 
         //variable to hold city names from local storage
         var cityName = (cities[i].city)
@@ -120,7 +120,9 @@ var coordinatesApiCall = function (cityName) {
 var getCoordinates = function(data){
     var lon = data.coord.lon
     var lat = data.coord.lat
-    console.log(lon, lat)
+
+    city.textContent="";
+    city.textContent = data.name;
 
     getWeather(lon, lat)
 }
@@ -147,7 +149,17 @@ var getWeather = function(lon, lat){
 
 var displayCurrentWeather = function (data) {
     //clear text content fields
-    city.textContent = "";
+
+    var iconCode = data.current.weather[0].icon
+
+    console.log(data)
+
+    console.log(iconCode)
+
+    var iconUrl = "http://openweathermap.org/img/w/"+ iconCode +".png"
+
+
+
     date.textContent = "";
     temp.textContent = "";
     wind.textContent = "";
@@ -155,8 +167,8 @@ var displayCurrentWeather = function (data) {
     uv.textContent = "";
 
     //assign text values from API
-    //city.textContent = weather.name;
-    
+    var image = document.createElement('img')
+    icon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png'>"
     temp.textContent = data.current.temp
     wind.textContent = data.current.wind_speed + " MPH";
     humidity.textContent = data.current.humidity + " %";
