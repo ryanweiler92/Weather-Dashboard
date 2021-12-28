@@ -161,12 +161,23 @@ var displayCurrentWeather = function (data) {
     temp.textContent = data.current.temp
     wind.textContent = data.current.wind_speed + " MPH";
     humidity.textContent = data.current.humidity + " %";
-    uv.textContent = data.current.uvi;
+    
+    //set uv index and change background color based on value
+    uv.textContent = data.current.uvi
+    if (data.current.uvi <= 1.0){
+        uv.classList = "bg-success";
+    } else if (data.current.uvi < 7){
+        uv.classList = "bg-warning"
+    } else {
+        uv.classList = "bg-danger"
+    }
+    
 
     displayDates(data);
 }
 
 var displayDates = function(data){
+    //get unix date from API and convert 
     var unixTimestamp = data.current.dt
     var a = new Date(unixTimestamp * 1000);
     var months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
