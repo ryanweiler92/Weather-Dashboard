@@ -12,7 +12,7 @@ Weather dashboard provides the current weather conditions and a 5 day forecast f
 ## Website
 https://ryanweiler92.github.io/Weather-Dashboard/
 
-![Weather Dashboard Screenshot](Assets/Images/Weather-Dashboard-Screenshot.jpg)
+![Weather Dashboard Screenshot](assets/images/Weather-Dashboard-Screenshot.jpg)
 
 ## Contribution
 Made By Ryan Weiler
