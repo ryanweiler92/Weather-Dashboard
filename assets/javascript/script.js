@@ -44,11 +44,11 @@ var createCities = function(e){
     //create object to store data and push to array
     var citySearchData = {}
     citySearchData.city = citySearchInput.value;
-    citySearchData.id = searchHistoryButton.id
+   citySearchData.id = searchHistoryButton.id
     citySearchDataList.push(citySearchData)
 
     searchHistoryButton.innerHTML = citySearchData.city;
-    searchHistoryEl.appendChild(searchHistoryButton);
+   searchHistoryEl.appendChild(searchHistoryButton);
 
     //run save cities function
     saveCities();
@@ -125,7 +125,12 @@ var coordinatesApiCall = function (cityName) {
             })
         } else {
             alert("Error: City not Found")
-        }
+           
+            }
+    
+
+
+        
     })
     .catch(function(error) {
         alert("Unable to connect to OpenWeather")
@@ -245,3 +250,16 @@ document.addEventListener("click", function(e){
 })
 
 loadCities();
+
+
+
+
+
+
+
+
+// Element.prototype.remove = function(){
+//     this.searchHistoryList.removeChild(this)
+
+// document.getElementById(cityCount).remove();
+// console.log(getElementById(cityCount))}
